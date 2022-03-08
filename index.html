@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <form>
+        <input id="search-item" type="text" placeholder="Search">
+        <input id="reset-search" type="reset" value="Reset">
+    </form>
+
+    <table id="users-table">
+        <tbody index="0">
+            <td><button id="number" onclick="reverseSortNumber()">№<img id="arrow" src="./img/down-arrow.png" alt="down-arrow"></button></td>
+            <td><button id="firstName" style="cursor:default;">First name</button></td>
+            <td><button id="lastName" style="cursor:default;">Last name</button></td>
+            <td><button id="picture" style="cursor:default;">Picture</button></td>
+            <td><button id="state" style="cursor:default;">State</button></td>
+            <td><button id="city" style="cursor:default;">City</button></td>
+            <td><button id="email" style="cursor:default;">E-mail</button></td>
+            <td><button id="phone" style="cursor:default;">Phone</button></td>
+            <td><button id="regDate" style="cursor:default;">Registered date</button></td>
+        </tbody>
+    </table>
+
+    <div id="not-found">
+
+    </div>
+
+    <img id="tooltip" class="tooltip" src="">
+
+    <script src="index.js"></script>
+</body>
+
+</html>

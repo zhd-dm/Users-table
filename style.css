@@ -1,0 +1,200 @@
+/* Reset CSS default styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-size: 1em;
+    outline: none;
+}
+
+code,
+kbd,
+samp,
+pre,
+tt,
+var,
+textarea,
+input,
+select,
+isindex,
+listing,
+xmp,
+plaintext {
+    font: inherit;
+    font-size: 1em;
+    white-space: normal;
+}
+
+dfn,
+i,
+cite,
+var,
+address,
+em {
+    font-style: normal;
+}
+
+th,
+b,
+strong,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+}
+
+a,
+img,
+a img,
+iframe,
+form,
+fieldset,
+abbr,
+acronym,
+object,
+applet,
+table {
+    border: none;
+}
+
+body {
+    padding-top: 10px;
+    line-height: 1;
+    color: black;
+}
+
+ul,
+ol,
+dir,
+menu {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+}
+
+
+/* Main code */
+
+#preloader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 1;
+    transition: 1s all;
+    opacity: 1;
+    visibility: visible;
+}
+
+#preloader.done {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 7px solid rgb(255, 255, 255);
+    border-radius: 50%;
+    border-top-color: rgb(180, 180, 180);
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    animation: 1s spin infinite linear;
+}
+
+@keyframes spin {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+table {
+    position: absolute;
+    width: 1200px;
+    bottom: 40px;
+    border-collapse: collapse;
+    left: 50%;
+    top: 50px;
+    transform: translate(-50%);
+}
+
+td {
+    position: relative;
+    height: 25px;
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+#arrow {
+    height: 16px;
+    width: 16px;
+}
+
+button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: none;
+    outline: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+img {
+    cursor: pointer;
+}
+
+
+/* #picture {
+    height: 48px;
+    width: 48px;
+} */
+
+form {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+#not-found {
+    position: fixed;
+    left: 0;
+    top: 40px;
+    width: 100%;
+    height: 100%;
+    background: rgb(180, 179, 179);
+    z-index: 2;
+    transition: 1s all;
+    opacity: 0;
+    visibility: hidden;
+}
+
+#not-found.done {
+    opacity: 1;
+    visibility: visible;
+}
+
+#tooltip {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    opacity: 1;
+}
