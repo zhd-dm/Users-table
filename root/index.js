@@ -1,4 +1,4 @@
-const URL = 'https://randomuser.me/api/?results=5';
+const URL = 'https://randomuser.me/api/?results=15';
 
 function sendRequest(method) {
     return new Promise((resolve, reject) => {
@@ -148,9 +148,9 @@ function resetSearch() {
 function tooltip(img) {
     let tooltip = getElById('tooltip');
     if (img == false) {
-        tooltip.style.display = "none";
+        tooltip.style.visibility = "hidden";
     } else {
-        tooltip.style.display = ""
+        tooltip.style.visibility = "visible"
         tooltip.setAttribute('src', img);
     }
 }
