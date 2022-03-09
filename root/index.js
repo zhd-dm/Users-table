@@ -111,17 +111,18 @@ function search() {
         for (let i = 1; i < tableRow.length; i++) {
             // Изначально flag = false, если введенная фраза совпадает с какой-либо/несколькими first name'ами,
             // тогда ничего не делаем.  
+            let notFound = getElById('not-found');
             flag = false;
             flag = regPhrase.test(tableRow[i].cells[1].innerHTML);
             if (flag) {
                 table.children[i].hidden = false;
+                notFound.classList.remove('done');
                 // Но когда flag не будет равен введенной фразе, мы скроем эти элементы.
             } else {
                 table.children[i].hidden = true;
                 j++; // И заодно j++
                 // Если j равен изначальному количеству загруженных картинок, отрендерим окно безуспешного поиска.
                 if (j === imagesCount) {
-                    let notFound = getElById('not-found');
                     if (!notFound.classList.contains('done')) {
                         notFound.classList.add('done');
                     }
@@ -137,7 +138,6 @@ function resetSearch() {
     let notFound = getElById('not-found');
     notFound.classList.remove('done');
     for (let i = 1; i < tableRow.length; i++) {
-        //tableRow[i].style.display = "";
         table.children[i].hidden = false;
     }
 }
@@ -148,9 +148,13 @@ function resetSearch() {
 function tooltip(img) {
     let tooltip = getElById('tooltip');
     if (img == false) {
+        tooltip.classList.remove('done');
         tooltip.style.visibility = "hidden";
     } else {
-        tooltip.style.visibility = "visible"
+        if (!tooltip.classList.contains('done')) {
+            tooltip.classList.add('done');
+        };
+        tooltip.style.visibility = "visible";
         tooltip.setAttribute('src', img);
     }
 }
