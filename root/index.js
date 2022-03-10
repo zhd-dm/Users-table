@@ -27,10 +27,10 @@ function sendRequest(method) {
 // Declaration main variables and load main functions.
 
 // Function for get id elements
-let getElById = item => { return document.getElementById(item); }
+let getElById = item => { return document.getElementById(item) }
 
 // Function to change visibility properties
-let visibility = (item, property) => { return item.style.visibility = property; }
+let visibility = (item, property) => { return item.style.visibility = property }
 
 let table = getElById('users-table'); // Main table
 let tableRow = table.rows;
@@ -40,7 +40,7 @@ let imagesCount = Number(loadImages[1]);
 
 
 sendRequest('GET', URL)
-    .then(data => { return createTable(data); })
+    .then(data => { return createTable(data) })
     .then(loader)
     .then(search)
     .catch(err => console.log(err))
@@ -89,7 +89,7 @@ function createTable(data) {
                 <td>${i}</td>
                 <td>${user.name.first}</td>
                 <td>${user.name.last}</td>
-                <td><img src="${user.picture.thumbnail}" onmouseover="tooltip('${largeImages[i]}')" onmouseout="tooltip(false)"></td>
+                <td><img src="${user.picture.thumbnail}" onmouseover="tooltip('${largeImages[i - 1]}')" onmouseout="tooltip(false)"></td>
                 <td>${user.location.state}</td>
                 <td>${user.location.city}</td>
                 <td>${user.email}</td>
