@@ -25,15 +25,19 @@ function sendRequest(method) {
 }
 
 // Declaration main variables and load main functions.
+
+// Function for get id elements
+let getElById = item => { return document.getElementById(item); }
+
+// Function to change visibility properties
+let visibility = (item, property) => { return item.style.visibility = property; }
+
 let table = getElById('users-table'); // Main table
 let tableRow = table.rows;
 // Ожидаем загрузки такого числа картинок, которое указано в ссылке после '='.
 let loadImages = URL.split('=');
 let imagesCount = Number(loadImages[1]);
-// Function for get id elements
-function getElById(item) {
-    return document.getElementById(item);
-}
+
 
 sendRequest('GET', URL)
     .then(data => { return createTable(data); })
@@ -70,31 +74,30 @@ function loader() {
 }
 
 function createTable(data) {
+    // usersData - массив объектов пользователей, пришедший с бэка.
     let usersData = data.results;
     let i = 1;
-    let j = 0;
-    let date;
+    // largeImages - массив, в котором будут лежать все картинки высокого разрешения, чтобы позже мы могли обратиться к этому массиву
+    // и отобразить нужную картинку.
     let largeImages = [];
 
     usersData.forEach(user => {
-        date = new Date(Date.parse(user.registered.date));
-        largeImage = user.picture.large;
-        largeImages.push(usersData[j].picture.large);
+        date = new Date(Date.parse(user.registered.date)).toLocaleDateString();
+        largeImages.push(user.picture.large);
         table.insertAdjacentHTML('beforeend',
             `<tbody index="${i}">
                 <td>${i}</td>
                 <td>${user.name.first}</td>
                 <td>${user.name.last}</td>
-                <td><img src="${user.picture.thumbnail}" onmouseover="tooltip('${largeImages[j]}')" onmouseout="tooltip(false)"></td>
+                <td><img src="${user.picture.thumbnail}" onmouseover="tooltip('${largeImages[i]}')" onmouseout="tooltip(false)"></td>
                 <td>${user.location.state}</td>
                 <td>${user.location.city}</td>
                 <td>${user.email}</td>
                 <td>${user.phone}</td>
-                <td>${date.toLocaleDateString()}</td>
+                <td>${date}</td>
             </tbody>`
         );
         i++;
-        j++;
     });
 }
 
@@ -122,10 +125,8 @@ function search() {
                 table.children[i].hidden = true;
                 j++; // И заодно j++
                 // Если j равен изначальному количеству загруженных картинок, отрендерим окно безуспешного поиска.
-                if (j === imagesCount) {
-                    if (!notFound.classList.contains('done')) {
-                        notFound.classList.add('done');
-                    }
+                if (j === imagesCount && !notFound.classList.contains('done')) {
+                    notFound.classList.add('done');
                 }
             }
         }
@@ -149,12 +150,12 @@ function tooltip(img) {
     let tooltip = getElById('tooltip');
     if (img == false) {
         tooltip.classList.remove('done');
-        tooltip.style.visibility = "hidden";
+        visibility(tooltip, "hidden");
     } else {
         if (!tooltip.classList.contains('done')) {
             tooltip.classList.add('done');
         };
-        tooltip.style.visibility = "visible";
+        visibility(tooltip, "visible");
         tooltip.setAttribute('src', img);
     }
 }
