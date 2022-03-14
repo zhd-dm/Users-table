@@ -1,49 +1,49 @@
 const URL = 'https://randomuser.me/api/?results=15';
 
 function sendRequest(method) {
+    // Создаем промис, который позволит "чейнить" отдельные участки JS кода и подгружать асинхронно код.
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
-
+            // У функции XMLHttpRequest() вызываем метод open() с аргументами.
         xhr.open(method, URL);
-
+        // Установим тип ответа JSON для получения JSON формата данных.
         xhr.responseType = 'json';
-
+        // Установим прослушивание события на ответ от сервера.
         xhr.onload = () => {
             if (xhr.status >= 400) {
-                reject(xhr.response);
+                reject(xhr.response); // В случае кода ошибки 400 и более в reject будет храниться неудачный ответ.
             } else {
-                resolve(xhr.response);
+                resolve(xhr.response); // Если 399 и меньше, то в resolve будет удачный ответ.
             }
         }
 
         xhr.onerror = () => {
-            reject(xhr.response)
+            reject(xhr.response);
         }
-
-        xhr.send();
+        xhr.send(); // Формируем отправку запроса
     });
 }
 
 // Declaration main variables and load main functions.
 
 // Function for get id elements
-let getElById = item => { return document.getElementById(item) }
+let getElById = item => document.getElementById(item);
 
 // Function to change visibility properties
-let visibility = (item, property) => { return item.style.visibility = property }
+let visibility = (item, property) => item.style.visibility = property;
 
 let table = getElById('users-table'); // Main table
 let tableRow = table.rows;
 // Ожидаем загрузки такого числа картинок, которое указано в ссылке после '='.
 let loadImages = URL.split('=');
+// Число картинок, которые должны загрузиться.
 let imagesCount = Number(loadImages[1]);
 
-
 sendRequest('GET', URL)
-    .then(data => { return createTable(data) })
-    .then(loader)
-    .then(search)
-    .catch(err => console.log(err))
+    .then(data => createTable(data)) // Вызов callback функции, в которую передаем аргумент data
+    .then(loader) // Затем грузим лоадер
+    .then(search) // Затем подгружаем поиск
+    .catch(err => console.log(err)) // В случае ошибки
 
 // Loader
 // Ждем загрузки всех картинок с сервера. В случае, если у пользователя супер быстрый интернет, лоадер все равно будет висеть 0.5 секунд.
@@ -73,14 +73,15 @@ function loader() {
     }
 }
 
+// Принимаем data и затем
 function createTable(data) {
-    // usersData - массив объектов пользователей, пришедший с бэка.
+    // data.results - массив объектов пользователей, пришедший с бэка, присвоим его значение в переменную usersData.
     let usersData = data.results;
     let i = 1;
-    // largeImages - массив, в котором будут лежать все картинки высокого разрешения, чтобы позже мы могли обратиться к этому массиву
+    // largeImages - массив, в котором будут лежать все картинки высокого разрешения, чтобы позже мы могли обратиться к этому массиву.
     // и отобразить нужную картинку.
     let largeImages = [];
-
+    // Рендер уникальной строки для каждого пользователя.
     usersData.forEach(user => {
         date = new Date(Date.parse(user.registered.date)).toLocaleDateString();
         largeImages.push(user.picture.large);
