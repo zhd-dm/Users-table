@@ -160,11 +160,15 @@ img {
     cursor: pointer;
 }
 
-
-/* #picture {
+#users-table img:not(:first-child) {
     height: 48px;
     width: 48px;
-} */
+}
+
+img .tooltip {
+    height: 130px;
+    width: 130px;
+}
 
 form {
     position: absolute;
